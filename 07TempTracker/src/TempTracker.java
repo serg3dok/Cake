@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * Created by sergeyo on 6/22/2017.
  */
@@ -11,6 +9,7 @@ class Temperature {
     int sumOfValues;
     double mean;
     int mode;
+    int maxOccurences;
     int[] temperaturesArr = new int[110];
 
     public Temperature() {
@@ -20,6 +19,8 @@ class Temperature {
         sumOfValues = 0;
         mean = 0;
         mode = 0;
+        maxOccurences = 0;
+
     }
 
     public void addTemp (int t) {
@@ -29,9 +30,14 @@ class Temperature {
         sumOfValues += t;
         temperaturesArr[t]++;
         mean = (double) sumOfValues / numberOfValues;
-
+        if (temperaturesArr[t] > maxOccurences) {
+            maxOccurences = temperaturesArr[t];
+            mode = t;
+        }
+        /*
         Arrays.sort(temperaturesArr);
         mode = temperaturesArr[temperaturesArr.length-1];
+        */
     }
 
     public int getMaxTemperature() {
@@ -63,7 +69,7 @@ public class TempTracker {
 
     public static void main(String[] args) {
 
-        int[] temperatures = {25, 10, 22, 4, 1, 16, 108 };
+        int[] temperatures = {25, 10, 22, 4, 1, 16, 108, 10, 4, 4 };
 
         Temperature temp = new Temperature();
         for (int i = 0; i < temperatures.length; i++) {
